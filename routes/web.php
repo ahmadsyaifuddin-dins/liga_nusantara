@@ -21,7 +21,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'check.user.access'])->group(function () {
     Route::middleware('role:SuperAdmin')->group(function () {
         Route::get('/users/create', [PlayerAccountController::class, 'create'])->name('users.create');
+        Route::get('/admin/users', [PlayerAccountController::class, 'index'])->name('users.index')->middleware(['auth', 'role:SuperAdmin']);
+        
         Route::post('/users', [PlayerAccountController::class, 'store'])->name('users.store');
+        Route::post('/admin/users/{user}/toggle', [PlayerAccountController::class, 'toggleActive'])->name('users.toggle');
     });
 });
 

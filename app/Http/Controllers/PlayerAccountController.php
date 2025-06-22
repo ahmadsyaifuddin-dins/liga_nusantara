@@ -12,6 +12,12 @@ class PlayerAccountController extends Controller
         return view('users.create');
     }
 
+    public function index()
+    {
+        $players = User::where('role', 'Player')->get();
+        return view('users.index', compact('players'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -30,4 +36,13 @@ class PlayerAccountController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Player berhasil ditambahkan');
     }
+
+    public function toggleActive(User $user)
+    {
+    $user->is_active = !$user->is_active;
+    $user->save();
+
+    return redirect()->route('users.index')->with('success', 'Status user diperbarui.');
+    }
+
 }
