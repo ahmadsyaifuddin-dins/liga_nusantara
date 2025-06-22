@@ -17,7 +17,7 @@ class CheckUserAccess
 
     // Nonaktif? Tendang balik
     if (!$user->is_active && $user->role != 'SuperAdmin') {
-        return abort(403, 'Akses dinonaktifkan oleh Super Admin.');
+        return abort(403, 'Akunmu dinonaktifkan oleh Super Admin.');
     }
 
     return $next($request);

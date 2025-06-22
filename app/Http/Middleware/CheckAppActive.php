@@ -9,15 +9,25 @@ use App\Models\Setting;
 class CheckAppActive
 {
     public function handle($request, Closure $next)
-    {
-        $user = Auth::user();
-        $isActive = Setting::getValue('app_active', 'true') === 'true';
+{
+    $isActive = \App\Models\Setting::getValue('app_active', 'true') === 'true';
+    $user = Auth::user();
+    $path = $request->path();
 
-        // ❗️Kalau bukan SuperAdmin DAN web dinonaktifkan, blokir
-        if (!$isActive && (!$user || $user->role !== 'SuperAdmin')) {
-            return response(view('maintenance'));
-        }
+    // Daftar path yang diizinkan meski nonaktif (login, logout, dll)
+    $allowedPaths = ['login', 'logout'];
 
+    // Cek jika user sudah login dan dia SuperAdmin → boleh masuk
+    if ($user && $user->role === 'SuperAdmin') {
         return $next($request);
     }
+
+    // Jika web nonaktif, user belum login, dan bukan halaman login → blokir
+    if (!$isActive && !in_array($path, $allowedPaths)) {
+        return response(view('maintenance'));
+    }
+
+    return $next($request);
+}
+
 }

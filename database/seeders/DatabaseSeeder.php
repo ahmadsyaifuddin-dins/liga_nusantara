@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Super Admin',
-            'email' => 'admin@liganusantara.com',
+            'email' => 'admin@liganusa.com',
             'password' => Hash::make('elabsolute10'),
             'role' => 'SuperAdmin',
             'is_active' => true,
