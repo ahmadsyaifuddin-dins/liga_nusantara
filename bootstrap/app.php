@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'check.user.access' => CheckUserAccess::class,
             'role' => \App\Http\Middleware\RoleMiddleware::class,
+            'check.app.active' => \App\Http\Middleware\CheckAppActive::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

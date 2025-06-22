@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -39,10 +41,17 @@ class PlayerAccountController extends Controller
 
     public function toggleActive(User $user)
     {
-    $user->is_active = !$user->is_active;
-    $user->save();
+        $user->is_active = !$user->is_active;
+        $user->save();
 
-    return redirect()->route('users.index')->with('success', 'Status user diperbarui.');
+        return redirect()->route('users.index')->with('success', 'Status user diperbarui.');
     }
 
+    public function toggleApp()
+    {
+        $current = Setting::getValue('app_active', 'true');
+        Setting::setValue('app_active', $current === 'true' ? 'false' : 'true');
+
+        return back()->with('success', 'Status aplikasi diperbarui.');
+    }
 }
