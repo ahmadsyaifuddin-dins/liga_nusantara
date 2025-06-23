@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\PesMatchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlayerAccountController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +62,27 @@ Route::middleware(['auth', 'check.user.access', 'role:SuperAdmin'])->group(funct
     Route::post('/admin/users/{user}/toggle', [PlayerAccountController::class, 'toggleActive'])->name('users.toggle');
     Route::post('/admin/toggle-app', [PlayerAccountController::class, 'toggleApp'])->name('app.toggle');
 });
+
+
+/*
+|--------------------------------------------------------------------------
+| Route Pes
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'check.user.access', 'check.app.active'])->group(function () {
+    Route::get('/matches/create', [PesMatchController::class, 'create'])->name('matches.create');
+    Route::post('/matches', [PesMatchController::class, 'store'])->name('matches.store');
+    Route::get('/matches', [PesMatchController::class, 'index'])->name('matches.index');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Route Leaderboard
+|--------------------------------------------------------------------------
+*/
+Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
+
 
 /*
 |--------------------------------------------------------------------------

@@ -45,4 +45,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function matchPlayers()
+    {
+        return $this->hasMany(PesMatchPlayer::class);
+    }
+
+    public function totalWins()
+    {
+        return $this->matchPlayers()->where('is_winner', true)->count();
+    }
+
+    public function totalMatches()
+    {
+        return $this->matchPlayers()->count();
+    }
+
+    public function averageScore()
+    {
+        return $this->matchPlayers()->avg('score');
+    }
 }

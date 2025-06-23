@@ -25,10 +25,18 @@
                         Daftar Player
                     </x-nav-link>
                     @endif
+                    @if(Auth::user()->role === 'SuperAdmin')
+                    <x-nav-link :href="route('matches.create')" :active="request()->routeIs('matches.create')">
+                        Tambah Pertandingan
+                    </x-nav-link>
+                    @endif
+                    <x-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.index')">
+                        Riwayat Pertandingan
+                    </x-nav-link>
 
-                    {{-- <x-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
+                    <x-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
                         Klasemen
-                    </x-nav-link> --}}
+                    </x-nav-link>
                 </div>
 
             </div>
@@ -113,9 +121,19 @@
             </x-responsive-nav-link>
             @endif
 
-            {{-- <x-responsive-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
+            @if(Auth::user()->role === 'SuperAdmin')
+            <x-responsive-nav-link :href="route('matches.create')" :active="request()->routeIs('matches.create')">
+                Tambah Pertandingan
+            </x-responsive-nav-link>
+            @endif
+            
+            <x-responsive-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.index')">
+                Riwayat Pertandingan
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('leaderboard')" :active="request()->routeIs('leaderboard')">
                 Klasemen
-            </x-responsive-nav-link> --}}
+            </x-responsive-nav-link>
         </div>
 
 
@@ -131,7 +149,7 @@
                         Website' }}
                     </button>
                 </form>
-            @endif
+                @endif
             </div>
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
