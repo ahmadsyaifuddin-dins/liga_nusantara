@@ -68,7 +68,7 @@ class PesMatchController extends Controller
                 'pes_match_id' => $match->id,
                 'user_id' => $playerData['user_id'],
                 'score' => $playerData['score'],
-                'is_winner' => $playerData['score'] == $maxScore || $playerData['user_id'] == $winnerId,
+                'is_winner' => $playerData['user_id'] == $winnerId,
             ]);
         }
 
