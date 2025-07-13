@@ -74,8 +74,9 @@ class PesMatchController extends Controller
 
         if ($request->hasFile('documentation')) {
             $file = $request->file('documentation');
-            $path = $file->store('matches', 'public');
-            $match->update(['documentation' => $path]);
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->move(public_path('uploads/matches'), $filename);
+            $match->update(['documentation' => 'uploads/matches/' . $filename]);
         }
 
         if ($winnerId) {

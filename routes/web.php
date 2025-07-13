@@ -4,6 +4,7 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\PesMatchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlayerAccountController;
+use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,8 @@ Route::middleware(['auth', 'check.user.access', 'check.app.active'])->group(func
     Route::get('/matches/create', [PesMatchController::class, 'create'])->name('matches.create');
     Route::post('/matches', [PesMatchController::class, 'store'])->name('matches.store');
     Route::get('/matches', [PesMatchController::class, 'index'])->name('matches.index');
+
+    Route::get('/players/{id}/profile', [PlayerController::class, 'showProfile'])->name('players.profile');
 });
 
 
