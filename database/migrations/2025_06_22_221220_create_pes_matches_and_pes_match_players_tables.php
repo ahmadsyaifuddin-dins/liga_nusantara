@@ -11,12 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pes_matches', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul')->nullable(); // bisa buat nama turnamen atau catatan
-            $table->timestamps();
-        });
-
         Schema::create('pes_match_players', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pes_match_id')->constrained('pes_matches')->cascadeOnDelete();
@@ -33,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pes_matches_and_pes_match_players_tables');
+        Schema::dropIfExists('pes_match_players');
     }
 };

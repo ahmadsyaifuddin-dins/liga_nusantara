@@ -23,7 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pes_matches', function (Blueprint $table) {
-            //
+            $table->dropForeign(['winner_id']);
+            $table->dropColumn('winner_id');
         });
     }
 };

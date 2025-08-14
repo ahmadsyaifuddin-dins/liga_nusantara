@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('pes_matches', function (Blueprint $table) {
             $table->id();
+            $table->string('judul')->nullable();
             $table->foreignId('player_1_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('player_2_id')->constrained('users')->cascadeOnDelete();
             $table->unsignedTinyInteger('score_1');
             $table->unsignedTinyInteger('score_2');
-            $table->foreignId('winner_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }
