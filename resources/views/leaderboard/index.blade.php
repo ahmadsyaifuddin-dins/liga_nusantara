@@ -85,7 +85,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                 @forelse($players as $index => $player)
-                                    <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors duration-200">
+                                    <tr class="bg-white dark:bg-gray-800 hover:bg-slate-950 dark:hover:bg-gray-750 transition-colors duration-200">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <div class="flex items-center">
                                                 @if($index == 0)
