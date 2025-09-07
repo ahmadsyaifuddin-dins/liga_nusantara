@@ -37,7 +37,7 @@ class PesMatchController extends Controller
             'players' => 'required|array|min:2|max:6',
             'players.*.user_id' => 'required|exists:users,id',
             'players.*.score' => 'required|integer|min:0',
-            'documentation' => 'nullable|file|mimes:jpg,jpeg,png,pdf,webp|max:2048',
+            'documentation' => 'nullable|file|mimes:jpg,jpeg,png,pdf,webp|max:5048',
             'penalty_winner_id' => 'nullable|exists:users,id', // Tambahan
         ]);
 
